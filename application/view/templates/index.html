@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{url_for('static', filename='static/style.css')}}" rel="stylesheet">
+    <script src="{{ url_for('static', filename='static/script.js') }}"></script>
+
+    <title>Desafio Buscapé</title>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar">
+            <div class="logo">
+                <img class="logo-menu"
+                src="{{url_for('static', filename='img/logo-buscape.png')}}" >
+            </div>
+            <div id="menu_carrinho">
+                <img class="menu" 
+                src="{{ url_for('static', filename='img/menu.png') }}" alt="menu" id="menu">
+            </div>
+        </nav>
+    </div>
+   
+    <div>
+        {% for product in carrinho_list %}
+        <div id="">
+            <div>
+                <p>Produto já adicionado ao carrinho</p>
+                <div>
+                    <img 
+                    src="{{product.get_imagens()[0]}}" alt="img">
+                </div>
+                <div>
+                    <h2>{{product.get_name()}}</h2>
+                    <p>{{ product.get_prestacao() }} X R${{ product.get_valorPrestacao() }}</p>
+                    <p>Preço: {{ product.get_valor() }}</p>
+                </div>
+            </div>
+            <div>
+                <a href="{{ url_for('remover', id=product.get_id()) }} "id="btn-danger">
+                    Remover
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1>Produtos</h1>
+    <div id="">
+        {% for product in product_list %}
+        <div>
+            <img id="" 
+            src="{{product.get_imagens()[0]}}">
+
+            <p id="nome">
+                {{product.get_name()}}
+            </p>
+
+            <p>
+                {{product.get_prestacao() }}X R${{ produto.get_valorPrestacao()}}
+            </p>
+            <p>Valor:
+                {{ product.get_preco() }}
+            </p>
+            <a 
+                href="{{url_for('adicionar', id=product.get_id())}}" id="btn-sucess">
+                Adcionar ao carrinho
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
